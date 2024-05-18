@@ -52,7 +52,7 @@ menu = {
 
 # 1. Set up order list. Order list will store a list of dictionaries for
 # menu item name, item price, and quantity ordered
-
+order_list_l=[]
 
 # Launch the store and present a greeting to the customer
 print("Welcome to the variety food truck.")
@@ -118,32 +118,43 @@ while place_order:
                     }
                     i += 1
             # 2. Ask customer to input menu item number
+            place_order_item=True
 
+            while place_order_item:
+                menu_selection=input("Please select a menu item from the list: ")
 
-            # 3. Check if the customer typed a number
-
+                # 3. Check if the customer typed a number
+                if menu_selection.isdigit():
                 # Convert the menu selection to an integer
+                    menu_selection=int(menu_selection)
 
+                    # 4. Check if the menu selection is in the menu items
+                    if menu_selection in menu_items.keys():
+                        
+                        # Store the item name as a variable
+                        menu_selection_item=menu_items[menu_selection]["Item name"]
+                        menu_selection_price=menu_items[menu_selection]["Price"]
+                        
+                        # Ask the customer for the quantity of the menu item
+                        quantity=input(f"How many {menu_selection_item}s would you like? (Default 1): ")
 
-                # 4. Check if the menu selection is in the menu items
+                        # Check if the quantity is a number, default to 1 if not
+                        if quantity.isdigit():
+                            quantity=int(quantity)
+                            if quantity<1:
+                                quantity=1
+                        else:
+                            quantity=1
 
-                    # Store the item name as a variable
-
-
-                    # Ask the customer for the quantity of the menu item
-
-
-                    # Check if the quantity is a number, default to 1 if not
-
-
-                    # Add the item name, price, and quantity to the order list
-
-
-                    # Tell the customer that their input isn't valid
-
-
+                        # Add the item name, price, and quantity to the order list                    
+                        
+                        order_list_l.append({"Item name":menu_selection_item, "Price":menu_selection_price, "Quantity":quantity})
+                        print(order_list_l)
+                        place_order_item=False
+                    else:
+                        # Tell the customer that their input isn't valid
+                        print(f"{menu_selection} was not a menu option.")
                 # Tell the customer they didn't select a menu option
-
         else:
             # Tell the customer they didn't select a menu option
             print(f"{menu_category} was not a menu option.")
