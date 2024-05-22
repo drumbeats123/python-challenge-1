@@ -120,6 +120,7 @@ while place_order:
                             "Price": value
                         }
                         i += 1
+                print("------------------------------------------\n")
                 # 2. Ask customer to input menu item number
                 place_order_item=True
 
@@ -171,72 +172,65 @@ while place_order:
 
         # 5. Check the customer's input
         match keep_ordering.upper():
+            # Keep ordering
             case "Y":
                 break
             case "N":
+                # Exit the keep ordering question loop
                 place_order=False
                 break
+            # Tell the customer to try again
             case _:
-                "Invalid selection"
-    
-            
-        
-                # Keep ordering
+                "Invalid selection. Please make a valid selection."
 
-                # Exit the keep ordering question loop
+# Complete the order
 
-                # Complete the order
-
-                # Since the customer decided to stop ordering, thank them for
-                # their order
-
-                # Exit the keep ordering question loop
-
-
-                # Tell the customer to try again
-
-item_total = sum([item["Price"]*item["Quantity"] for item in order_list])
-item_total = f"${item_total:,.2f}"
-# total_cost = sum(item_total)
-# Print out the customer's order
+# Since the customer decided to stop ordering, thank them for
+# their order
+print("\n\nThank you for your order!")
 print("This is what we are preparing for you.\n")
 
 # Uncomment the following line to check the structure of the order
 #print(order)
 
-print("Item name                 | Price  | Quantity")
-print("--------------------------|--------|----------")
-
-i=1
-for orders in order_list:
-    order_item_spaces= " " * (26 - len(orders['Item name']))
-    order_price_spaces=" " * (6 - len(str(orders['Price'])))
-
-    print(f"{orders['Item name']}{order_item_spaces}| ${orders['Price']}{order_price_spaces}| {orders['Quantity']}")
-
-    i += 1
-print("----------------------------------------------")
-
-len_item_total=len(item_total)
-item_spaces=" " * 23
-print(f"Total{item_spaces}{item_total}")
-print("----------------------------------------------")
-
+# Print out the customer's order
+print("Item name                 | Price  | Quantity | Total")
+print("--------------------------|--------|----------|--------")
 
 # 6. Loop through the items in the customer's order
 
+i=1
+for orders in order_list:
+
     # 7. Store the dictionary items as variables
-
-
+    order_item=orders['Item name']
+    order_price=f"${orders['Price']:,.2f}"
+    order_quantity=orders['Quantity']
+    order_line_total=f"${orders['Price'] * orders['Quantity']:,.2f}"
+    
     # 8. Calculate the number of spaces for formatted printing
-
+    order_item_spaces_cnt=(26 - len(orders['Item name']))
+    order_price_spaces_cnt=(6 - len(str(orders['Price'])))
+    order_quantity_spaces_cnt=(9 - len(str(orders['Quantity'])))
 
     # 9. Create space strings
-
+    order_item_spaces = " " * order_item_spaces_cnt
+    order_price_spaces = " " * order_price_spaces_cnt
+    order_quantity_spaces = " " * order_quantity_spaces_cnt
 
     # 10. Print the item name, price, and quantity
+    print(f"{order_item}{order_item_spaces}| {order_price}{order_price_spaces}| {order_quantity}{order_quantity_spaces}| {order_line_total}")
 
+    i += 1
+print("-------------------------------------------------------")
 
 # 11. Calculate the cost of the order using list comprehension
 # Multiply the price by quantity for each item in the order list, then sum()
 # and print the prices.
+item_total_list = [item["Price"]*item["Quantity"] for item in order_list]
+item_total = sum(item_total_list)
+item_total = f"${item_total:,.2f}"
+len_item_total = len(item_total)
+item_spaces=" " * 37
+print(f"Grand Total{item_spaces}{item_total}")
+print("-------------------------------------------------------")
