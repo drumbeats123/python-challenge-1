@@ -52,7 +52,7 @@ menu = {
 
 # 1. Set up order list. Order list will store a list of dictionaries for
 # menu item name, item price, and quantity ordered
-order_list_l=[]
+order_list=[]
 
 # Launch the store and present a greeting to the customer
 print("Welcome to the variety food truck.")
@@ -151,7 +151,7 @@ while place_order:
 
                             # Add the item name, price, and quantity to the order list                    
                             
-                            order_list_l.append({"Item name":menu_selection_item, "Price":menu_selection_price, "Quantity":quantity})
+                            order_list.append({"Item name":menu_selection_item, "Price":menu_selection_price, "Quantity":quantity})
                             place_order_item=False
                             select_menu=False
                         else:
@@ -195,7 +195,9 @@ while place_order:
 
                 # Tell the customer to try again
 
-
+item_total = sum([item["Price"]*item["Quantity"] for item in order_list])
+item_total = f"${item_total:,.2f}"
+# total_cost = sum(item_total)
 # Print out the customer's order
 print("This is what we are preparing for you.\n")
 
@@ -206,7 +208,7 @@ print("Item name                 | Price  | Quantity")
 print("--------------------------|--------|----------")
 
 i=1
-for orders in order_list_l:
+for orders in order_list:
     order_item_spaces= " " * (26 - len(orders['Item name']))
     order_price_spaces=" " * (6 - len(str(orders['Price'])))
 
@@ -214,6 +216,12 @@ for orders in order_list_l:
 
     i += 1
 print("----------------------------------------------")
+
+len_item_total=len(item_total)
+item_spaces=" " * 23
+print(f"Total{item_spaces}{item_total}")
+print("----------------------------------------------")
+
 
 # 6. Loop through the items in the customer's order
 
