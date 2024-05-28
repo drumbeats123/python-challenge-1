@@ -50,17 +50,14 @@ menu = {
     }
 }
 
-def repprint(char, reps):
-  print(char * reps)
-
 # 1. Set up order list. Order list will store a list of dictionaries for
 # menu item name, item price, and quantity ordered
 order_list=[]
 
 # Launch the store and present a greeting to the customer
-repprint("=",41)
+print("=" * 41)
 print("|  Welcome to DC's variety food truck.  |")
-repprint("=",41)
+print("=" * 41)
 # Customers may want to order multiple items, so let's create a continuous
 # loop
 place_order = True
@@ -101,6 +98,7 @@ while place_order:
                 print(f"What {menu_category_name} item would you like to order?")
                 i = 1
                 menu_items = {}
+                print("------------------------------------------")
                 print("Item # | Item name                | Price")
                 print("-------|--------------------------|-------")
                 for key, value in menu[menu_category_name].items():
@@ -163,6 +161,8 @@ while place_order:
                             # Tell the customer that their input isn't valid
                             print(f"{menu_selection} was not a menu option.")
                     # Tell the customer they didn't select a menu option
+                    else:
+                        print(f"You didn't select a number from the {menu_category_name} menu.")
             else:
                 # Tell the customer they didn't select a menu option
                 print(f"{menu_category} was not a menu option.")
@@ -198,7 +198,7 @@ print("This is what we are preparing for you.\n")
 #print(order)
 
 # Print out the customer's order
-repprint("-",56)
+print("-" * 56)
 print("Item name                 | Price  | Quantity |  Total  ")
 print("--------------------------|--------|----------|---------")
 
@@ -233,13 +233,13 @@ for orders in order_list:
     order_quantity_spaces = " " * order_quantity_spaces_cnt
     order_line_total_spaces = " " * order_line_total_spaces_cnt
 
-    # 11. Print the item name, price, and quantity
+    # 11. Print the item name, price, quantity and item totals
     print(f"{order_item}{order_item_spaces}| {order_price}{order_price_spaces}| {order_quantity}{order_quantity_spaces}|{order_line_total_spaces}{order_line_total}")
 
     i += 1
-repprint("=",56)
+print("=" * 56)
 
 len_item_total = len(item_total)
 item_total_spaces=" " * (45-len_item_total)
 print(f"Grand Total{item_total_spaces}{item_total}")
-repprint("=",56)
+print("=" * 56)
